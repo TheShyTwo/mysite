@@ -17,3 +17,9 @@
 
 h2 {
   color: red; }
+
+img.best-course {
+  height: 400px; }
+
+.carousel-caption h3, p {
+  color: #000000; }

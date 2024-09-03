@@ -1,13 +1,12 @@
-const express = require('express')
-const SiteControllers = require('../app/controllers/SiteControllers')
+const SiteController = require('../app/controllers/SiteController')
 
-const router = express.Router()
+const router = new require('express').Router()
 
-router.get('/login', SiteControllers.login)
-router.get('/user', SiteControllers.user)
-router.get('/logout', SiteControllers.logout)
-router.get('/', SiteControllers.index)
+router.get('/login', SiteController.login)
+router.get('/logout', SiteController.logout)
+router.get('/user', SiteController.user)
+router.get('/', SiteController.index)
 
-router.post('/login', SiteControllers.handleLogin)
+router.post('/login', SiteController.handleLogin)
 
 module.exports = router

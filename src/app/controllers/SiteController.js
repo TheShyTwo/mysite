@@ -1,13 +1,19 @@
-class SiteControllers {
-    index(req, res) {
-        res.render('home')
+const Course = require('../model/Course')
+const { multipleMongooseToObject } = require('../../util/mongoose')
+
+class SiteController {
+    async index(req, res) {
+        const courses = await Course.find({})
+        const bestCourses = await Course.find({})
+            .sort({price: -1})
+            .limit(5)
+        res.render('home', {
+            courses: multipleMongooseToObject(courses),
+            bestCourses: multipleMongooseToObject(bestCourses)
+        })
     }
     login(req, res) {
-        if (req.session.user) {
-            res.redirect('/')
-        } else {
-            res.render('login')
-        }
+        res.render('login')
     }
     handleLogin(req, res) {
         const { username, password } = req.body
@@ -22,9 +28,10 @@ class SiteControllers {
         }
     }
     user(req, res) {
-        if (req.session.user) {
+        if(req.session.user) {
             res.render('user', {username: req.session.user})
         } else {
+            console.log('You need login first !')
             req.flash('message', 'You need login first !')
             res.redirect('/login')
         }
@@ -32,13 +39,15 @@ class SiteControllers {
     logout(req, res) {
         req.session.destroy((err) => {
             if (err) {
-                console.log('err')
-                res.redirect('/login')
+                console.log('Can not logout !')
+                console.log(err)
+                res.redirect('/')
             } else {
-                res.redirect('/login')
+                console.log('Logout successfully !')
+                res.redirect('/')
             }
         })
     }
 }
 
-module.exports = new SiteControllers()
+module.exports = new SiteController()
