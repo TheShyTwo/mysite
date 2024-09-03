@@ -5,18 +5,20 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "node-sass --watch src/resources/scss -o src/public/css",
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "express": "^4.19.2",
     "express-handlebars": "^8.0.1",
-    "express-session": "^1.18.0",
-    "flash": "^1.1.0"
+    "express-session": "^1.18.0"
   },
   "devDependencies": {
+    "node-sass": "^9.0.0",
     "nodemon": "^3.1.4"
   }
 }

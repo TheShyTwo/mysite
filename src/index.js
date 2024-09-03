@@ -2,7 +2,7 @@ const express = require('express')
 const path = require('path')
 const { engine } = require('express-handlebars')
 const session = require('express-session')
-const flash = require('flash')
+const flash = require('connect-flash')
 const now = require('./util/timeFormat')
 
 const host = '127.0.0.1'
@@ -20,6 +20,19 @@ app.set('views', path.join(__dirname, 'resources', 'views'))
 
 app.use((req, res, next) => {
     console.log(`${now()} - ${req.method} - ${req.url}`)
+    next()
+})
+
+app.use(session({
+    secret: 'longyeuhai',
+    resave: false,
+    saveUninitialized: true
+}))
+
+app.use(flash())
+app.use((req, res, next) => {
+    res.locals.error = req.flash('error')
+    res.locals.message = req.flash('message')
     next()
 })
 

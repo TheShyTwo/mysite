@@ -1,0 +1,19 @@
+.login-form {
+  width: 400px;
+  padding: 20px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  margin: 50px auto;
+  background-color: #f9f9f9; }
+
+.login-form label {
+  margin-right: 10px; }
+
+.login-form .form-group {
+  margin-bottom: 15px; }
+
+.login-form button {
+  width: 100%; }
+
+h2 {
+  color: red; }
